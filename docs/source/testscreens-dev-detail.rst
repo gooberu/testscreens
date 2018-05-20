@@ -106,6 +106,8 @@ Steps
             }
         }
 
+    #. Fix Unit Tests.  Mod test to check for the "Test Screens" Text.
+    
     #. Fix errors and verify application deploys and runs ::
 
         macci:testscreens cat$ flutter run

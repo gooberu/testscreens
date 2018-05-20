@@ -72,16 +72,41 @@ Steps
     #. Import github gooberu-testscreens-github_ repo
     #. Verify gooberu-testscreens-readthedocs_
 
-#. Use the skeleton from youtube-flutter-chat-tutorial_ source youtube-flutter-chat-github_
+#. Add some new Fonts to Project Assets
 
-   #. Command line ::
+    #. Download the download-UbuntuFontFamily_ unzip and move to ~/bast23/testscreens/founts
 
-        macci:testscreens cat$ mv lib/main.dart lib/main.dart.flutterbaseline
-        macci:testscreens cat$ mv main.dart.txt lib/main.dart
-        macci:testscreens cat$ mv platform_adaptive.dart.txt lib/platform_adaptive.dart
-        macci:testscreens cat$ mv type_meme.dart.txt lib/type_meme.dart
+    #. Command line ::
 
-   #. Fix errors and verify application deploys and runs ::
+        macci:testscreens cat$ mkdir fonts
+        macci:testscreens cat$ cp ~/Downloads/Ubuntu/Ubuntu-Bold.ttf fonts/
+        macci:testscreens cat$ cp ~/Downloads/Ubuntu/Ubuntu-Regular.ttf fonts/
+
+    #. Add font assets to pubspec.yaml ::
+
+        fonts:
+            - family: Ubuntu
+            fonts:
+                - asset: fonts/Ubuntu-Regular.ttf
+                - asset: fonts/Ubuntu-Bold.tff
+                
+    #. Add font family Ubuntu in lib/main.dart ::
+
+        class TestScreens extends StatelessWidget {
+            @override
+            Widget build(BuildContext context) {
+                return new MaterialApp(
+                theme: new ThemeData(
+                    primarySwatch: Colors.blue,
+                    accentColor: Colors.deepPurple,
+                    fontFamily: 'Ubuntu',
+                ),
+                home: new SubjectList(),
+                );
+            }
+        }
+
+    #. Fix errors and verify application deploys and runs ::
 
         macci:testscreens cat$ flutter run
 
@@ -110,21 +135,15 @@ Resources
 
 #. Github Project Repo: gooberu-testscreens-github_
 #. Read the Docs: gooberu-testscreens-readthedocs_
-#. Tutorial via GoogleIO-17 "Single Codebase, Two Apps with Flutter and Firebase" see youtube-flutter-chat-tutorial_
-#. Github source for tutorial youtube-flutter-chat-github_ 
-#. Firebase console for firebase-chat2cld_ project database
-#. Github source for memechat-skeleton_
+#. Ubuntu Font Family at download-UbuntuFontFamily_
 
 
 .. _readthedocs: https://readthedocs.org/
-.. _gooberu-testscreens-readthedocs: https://gooberu-testscreens.readthedocs-hosted.com/en/latest/index.html
+.. _gooberu-testscreens-readthedocs: http://testscreens.readthedocs.io/en/latest/
 .. _gooberu-testscreens-github: https://github.com/gooberu/testscreens
+.. _download-UbuntuFontFamily: https://fonts.google.com/download?family=Ubuntu
 .. _testscreens-checkpoint-01: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-01
 .. _testscreens-checkpoint-02: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-02
 .. _testscreens-checkpoint-03: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-03
 .. _testscreens-checkpoint-04: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-04
 
-.. _youtube-flutter-chat-tutorial: https://youtu.be/w2TcYP8qiRI?list=PLlpxjI4sVd-zZ1jpJHJMSHGiWInsvwwf_
-.. _youtube-flutter-chat-github: https://github.com/efortuna/memechat
-.. _firebase-chat2cld: https://console.firebase.google.com/project/chat2cld/overview
-.. _memechat-skeleton: https://github.com/efortuna/memechat/blob/skeleton/lib/main.dart

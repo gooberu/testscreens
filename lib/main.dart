@@ -12,6 +12,7 @@ class TestScreens extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
         accentColor: Colors.deepPurple,
+        fontFamily: 'Ubuntu'
       ),
       home: new SubjectList(),
     );

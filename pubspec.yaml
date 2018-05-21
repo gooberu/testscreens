@@ -16,3 +16,6 @@ flutter:
         - asset: fonts/Ubuntu-Regular.ttf
         - asset: fonts/Ubuntu-Bold.ttf
   uses-material-design: true
+
+  assets:
+    - assets/subjects.json

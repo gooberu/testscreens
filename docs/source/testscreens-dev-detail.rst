@@ -107,12 +107,12 @@ Steps
         }
 
     #. Fix Unit Tests.  Mod test to check for the "Test Screens" Text.
-    
+
     #. Fix errors and verify application deploys and runs ::
 
         macci:testscreens cat$ flutter run
 
-#. Produce testscreens-checkpoint-02_ Basic Chat Screen
+#. Produce testscreens-checkpoint-02_ Add Assets
 
    #. Command line ::
 
@@ -129,6 +129,72 @@ Steps
     
    #. Verify checkpoint testscreens-checkpoint-02_
 
+#. Create SubjectList Data Model in assets/Subjects.json
+
+    #. Create a JSON data file ::
+
+        {
+        "subjects": [
+            {
+            "subject": "Chemistry",
+            "online": true,
+            "id": 1,
+            "pictures": [
+                "http://lorempixel.com/400/200/people",
+                "http://lorempixel.com/400/200/technics"
+                ],
+            "like_counter": 2,
+            "location": "St James, WA",
+            "tags": ["TauBetaPi", "Chem101Study", "GooberU"],
+            "description": "",
+            "image_url": "http://via.placeholder.com/100x100"
+            },
+            {
+            "name": "Physics",
+            "adopted": false,
+            "id": 2,
+            "pictures": [
+                "http://lorempixel.com/400/200/people",
+                "http://lorempixel.com/400/200/technics"
+                ],
+            "like_counter": 1,
+            "location": "St James, WA",
+            "tags": ["TauBetaPi", "Chem101Study", "GooberU"],
+            "description": "",
+            "image_url": "http://via.placeholder.com/100x100"
+            }
+        ]
+        }
+
+    #. Add asset/subject.json to pubspec.yaml
+    #. Create object model lib/models/subject.dart
+    #. Create service api in lib/services/api.dart
+    #. Add _loadSubjects() to _SubjectListState class in lib/ui/subject_list.dart
+    #. Create List view for Subjects in lib/ui/subject_list.dart
+        #. setState in _loadSubjects
+        #. call _buildBody from the build Widget
+        #. create _buildBody Widget
+        #. create _getListViewWidget
+        #. in _buildBody Widget call _getAppTitleWidget() and _getListViewWidget()
+        #. create Future<Null> refresh to _loadSubjects on refresh
+        #. create _buildSubjectItem Widget.  This builds the nested UI for the subject list elements.
+
+#. Produce testscreens-checkpoint-03_ Subject Model in assets/Subjects.json
+
+   #. Command line ::
+
+        macci:testscreens cat$ cd ~/bast23/testscreens/docs
+        macci:docs cat$ vi source/testscreens-dev-detail.rst (update doc)
+        macci:docs cat$ make html 
+        macci:docs cat$ open build/html/index.html (verify docs)
+        macci:testscreens cat$ cd ~/bast23/testscreens
+        macci:testscreens cat$ git add *
+        macci:testscreens cat$ git commit -m "commit for testscreens-checkpoint-03 - SubjectList Model"
+        macci:testscreens cat$ git tag testscreens-checkpoint-03
+        macci:testscreens cat$ git push
+        macci:testscreens cat$ git push origin testscreens-checkpoint-03
+    
+   #. Verify checkpoint testscreens-checkpoint-03_
 
 
 

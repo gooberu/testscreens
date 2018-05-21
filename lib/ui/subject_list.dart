@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:testscreens/models/subject.dart';
 import 'package:testscreens/services/api.dart';
+import 'package:testscreens/ui/subject_details/details_page.dart';
+import 'package:testscreens/ui/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class SubjectList extends StatefulWidget {
@@ -33,7 +35,7 @@ class _SubjectListState extends State<SubjectList> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             new ListTile(
-              //onTap: () => _navigateToSubjectDetails(subject, index),
+              onTap: () => _navigateToSubjectDetails(subject, index),
               leading: new Hero(
                 tag: index,
                 child: new CircleAvatar(
@@ -50,6 +52,17 @@ class _SubjectListState extends State<SubjectList> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  _navigateToSubjectDetails(Subject subject, Object avatarTag) {
+    Navigator.of(context).push(
+      new FadePageRoute(
+        builder: (c) {
+          return new SubjectDetailsPage(subject, avatarTag: avatarTag);
+        },
+        settings: new RouteSettings(),
       ),
     );
   }

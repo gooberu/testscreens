@@ -196,6 +196,36 @@ Steps
     
    #. Verify checkpoint testscreens-checkpoint-03_
 
+#. Create SubjectList detail view page and navigation
+
+    #. Create ui/subject_details/details_body.dart
+    #. Create ui/subject_details/details_page.dart
+    #. Create ui/subject_details/header/details_header.dart
+    #. Create ui/subject_details/footer/details_footer.dart
+
+#. Create Routes and Navigator
+
+    #. Create ui/utils/routes.dart
+    #. Add _navigateToSubjectDetails() to ui/subject_list.dart
+    #. Add some basic state and UI returns to _SubjectDetailsPageState Widget in ui/subject_details/details_page.dart
+    #. Call _navigateToSubjectDetails() in the onTap: of the ListTitle in ui/subject_list.dart
+
+#. Produce testscreens-checkpoint-04_ Subject List Detail view and navigation
+
+   #. Command line ::
+
+        macci:testscreens cat$ cd ~/bast23/testscreens/docs
+        macci:docs cat$ vi source/testscreens-dev-detail.rst (update doc)
+        macci:docs cat$ make html 
+        macci:docs cat$ open build/html/index.html (verify docs)
+        macci:testscreens cat$ cd ~/bast23/testscreens
+        macci:testscreens cat$ git add *
+        macci:testscreens cat$ git commit -m "commit for testscreens-checkpoint-04 - SubjectList Detail View"
+        macci:testscreens cat$ git tag testscreens-checkpoint-04
+        macci:testscreens cat$ git push
+        macci:testscreens cat$ git push origin testscreens-checkpoint-04
+    
+   #. Verify checkpoint testscreens-checkpoint-04_
 
 
 Resources
@@ -204,7 +234,6 @@ Resources
 #. Github Project Repo: gooberu-testscreens-github_
 #. Read the Docs: gooberu-testscreens-readthedocs_
 #. Ubuntu Font Family at download-UbuntuFontFamily_
-
 
 .. _readthedocs: https://readthedocs.org/
 .. _gooberu-testscreens-readthedocs: http://testscreens.readthedocs.io/en/latest/

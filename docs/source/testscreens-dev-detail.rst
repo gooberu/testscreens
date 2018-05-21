@@ -333,7 +333,7 @@ Steps
             #. google_sign_in: "3.0.0"
         #. flutter run (verify application will still build)
     #. Add Authentication via google_sign_in
-        #. Goto firebase-console-Authentication_
+        #. Goto firebase-testscreens-Authentication_
         #. Click on "SIGN-IN METHOD"
         #. Click on Google, then click Enable
             #. I set Project public-facing name: project-testscreens
@@ -367,6 +367,89 @@ Steps
         macci:testscreens cat$ git push origin testscreens-checkpoint-05
     
    #. Verify checkpoint testscreens-checkpoint-05_
+
+#. Create Firebase Cloud Firestore for testscreens-checkpoint-06_
+
+#. Setup database backend
+
+    #. Goto firebase-testscreens-Database_
+    #. Click Cloud Firestore "Get Started"
+    #. Click "Locked Mode" for now (we are using the SHA-1) 
+    #. Add new Collection: subjects
+    #. Manually add the subjects.json data
+    #. Goto firebase-testscreens-Storage_
+    #. Click "Get Started"
+    #. Accept default rules
+    #. Click "RULES" which is firebase-testscreens-Storage-Rules_
+    #. Change "allow read, write: if request.auth != null;" to "allow read;"
+    #. Upload images to firebase-testscreens-Storage-Files_
+    #. Replace Database url links with links from firebase-testscreens-Storage-Files_
+
+#. Integration of Firebase into Flutter Application
+
+    #. Edit lib/services/api.dart
+        #. import 'package:cloud_firestore/cloud_firestore.dart'
+        #. Add _fromDocumentSnapshot to Subject extension
+        #. Add Future<List<Subject>> getAllSubjects
+        #. Add StreemSubscription to Subject
+    #. Edit lib/ui/subject_list.dart
+        #. comment out _loadSubjects in initState
+        #. Add subjects api call to _loadFromFirebase
+        #. comment out _loadSubjects()
+        #. Create _reloadSubjects
+        #. call _reloadSubjects from initState and refresh
+    #. Edit lib/models/subject.dart
+        #. Add documentId
+    #. Click "RULES" which is firebase-testscreens-Database-Rules_
+    #. Change Rule to Following::
+
+        service cloud.firestore {
+            match /databases/{database}/documents {
+
+                //Allow public read access to all subjects
+                match /subjects/{subjectId} {
+                    allow read;
+                }
+                function isSignedIn() {
+                    return request.auth != null;
+                }
+            }
+        }
+
+    #. flutter run (test it)
+        #. CRAP ERROR::
+
+            I/zygote64(22792): Do partial code cache collection, code=59KB, data=44KB
+            I/zygote64(22792): After code cache collection, code=56KB, data=43KB
+            I/zygote64(22792): Increasing code cache capacity to 256KB
+            E/flutter (22792): [ERROR:topaz/lib/tonic/logging/dart_error.cc(16)] Unhandled exception:
+            E/flutter (22792): PlatformException(Error performing getDocuments, PERMISSION_DENIED: Missing or insufficient permissions., null)
+            E/flutter (22792): #0      StandardMethodCodec.decodeEnvelope (package:flutter/src/services/message_codecs.dart:547:7)
+            E/flutter (22792): #1      MethodChannel.invokeMethod (package:flutter/src/services/platform_channel.dart:279:18)
+        
+        #. THAT may have been the firebase-testscreens-Database-Rules_ change did not take effect yet.... waiting.
+        #. WORKS... THANK THE CODE GODS...
+
+#. Produce testscreens-checkpoint-06_ Firebase Cloud Firestore
+
+   #. Command line ::
+
+        macci:testscreens cat$ cd ~/bast23/testscreens/docs
+        macci:docs cat$ vi source/testscreens-dev-detail.rst (update doc)
+        macci:docs cat$ make html 
+        macci:docs cat$ open build/html/index.html (verify docs)
+        macci:testscreens cat$ cd ~/bast23/testscreens
+        macci:testscreens cat$ git add *
+        macci:testscreens cat$ git commit -m "commit for testscreens-checkpoint-06 - Firebase Cloud Firestore"
+        macci:testscreens cat$ git tag testscreens-checkpoint-06
+        macci:testscreens cat$ git push
+        macci:testscreens cat$ git push origin testscreens-checkpoint-06
+    
+   #. Verify checkpoint testscreens-checkpoint-06_
+
+
+
+
 
 
 
@@ -404,15 +487,26 @@ Resources
 #. Firebase console (based on google login) firebase-console_
 #. Firebase testscreens console firebase-testscreens-console_
 #. Firebase debug cert help firebase-debug-cert_
-#. firebase-console-Authentication_
+#. firebase-testscreens-Authentication_
+#. firebase-testscreens-Database_
+#. firebase-testscreens-Database-Rules_
+#. firebase-testscreens-Storage_
+#. firebase-testscreens-Storage-Rules_
+#. firebase-testscreens-Storage-Files_
+
 
 .. _readthedocs: https://readthedocs.org/
 .. _gooberu-testscreens-readthedocs: http://testscreens.readthedocs.io/en/latest/
 .. _gooberu-testscreens-github: https://github.com/gooberu/testscreens
 .. _download-UbuntuFontFamily: https://fonts.google.com/download?family=Ubuntu
 .. _firebase-console: https://console.firebase.google.com/
-.. _firebase-console-Authentication: https://console.firebase.google.com/project/gooberu-testscreens/authentication/users
 .. _firebase-testscreens-console: https://console.firebase.google.com/project/gooberu-testscreens/overview
+.. _firebase-testscreens-Authentication: https://console.firebase.google.com/project/gooberu-testscreens/authentication/users
+.. _firebase-testscreens-Database: https://console.firebase.google.com/project/gooberu-testscreens/database
+.. _firebase-testscreens-Database-Rules: https://console.firebase.google.com/project/gooberu-testscreens/database/firestore/rules
+.. _firebase-testscreens-Storage: https://console.firebase.google.com/project/gooberu-testscreens/storage/gooberu-testscreens.appspot.com/files
+.. _firebase-testscreens-Storage-Rules: https://console.firebase.google.com/project/gooberu-testscreens/storage/gooberu-testscreens.appspot.com/rules
+.. _firebase-testscreens-Storage-Files: https://console.firebase.google.com/project/gooberu-testscreens/storage/gooberu-testscreens.appspot.com/files
 .. _firebase-debug-cert: https://developers.google.com/android/guides/client-auth
 .. _testscreens-checkpoint-NN: https://github.com/gooberu/testscreens
 .. _testscreens-checkpoint-01: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-01
@@ -420,4 +514,5 @@ Resources
 .. _testscreens-checkpoint-03: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-03
 .. _testscreens-checkpoint-04: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-04
 .. _testscreens-checkpoint-05: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-05
+.. _testscreens-checkpoint-06: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-06
 

@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 class Subject {
+  final String documentId;
   final int externalId;
   final String name;
   final String description;
@@ -12,6 +13,7 @@ class Subject {
   final List<String> badges;
 
   Subject({
+    @required this.documentId,
     @required this.externalId,
     @required this.name,
     @required this.description,

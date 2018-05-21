@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:testscreens/models/subject.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -32,6 +33,38 @@ class SubjectApi {
     List<Subject> subjects = [];
     json.decode(jsonData)['subjects'].forEach((subject) => subjects.add(_fromMap(subject)));
     return subjects;
+  }
+
+  Future<List<Subject>> getAllSubjects() async {
+    return (await Firestore.instance.collection('subjects').getDocuments())
+        .documents
+        .map((snapshot) => _fromDocumentSnapshot(snapshot))
+        .toList();
+  }
+
+  StreamSubscription watch(Subject subject, void onChange(Subject subject)) {
+    return Firestore.instance
+        .collection('subjects')
+        .document(subject.documentId)
+        .snapshots
+        .listen((snapshot) => onChange(_fromDocumentSnapshot(snapshot)));
+  }
+
+  Subject _fromDocumentSnapshot(DocumentSnapshot snapshot) {
+    final data = snapshot.data;
+
+    return new Subject(
+      documentId: snapshot.documentID,
+      externalId: data['id'],
+      name: data['name'],
+      description: data['description'],
+      avatarUrl: data['image_url'],
+      location: data['location'],
+      likeCounter: data['like_counter'],
+      isOnline: data['online'],
+      pictures: new List<String>.from(data['pictures']),
+      badges: new List<String>.from(data['badges'])
+    );
   }
 
   static Subject _fromMap(Map<String, dynamic> map) {

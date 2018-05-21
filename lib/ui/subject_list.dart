@@ -18,22 +18,35 @@ class _SubjectListState extends State<SubjectList> {
   @override
   void initState() {
     super.initState();
-    _loadSubjects();
+//    _loadSubjects();
     _loadFromFirebase();
+    _reloadSubjects();
   }
   
   _loadFromFirebase() async {
     final api = await SubjectApi.signInWithGoogle();
+    final subjects = await api.getAllSubjects();
     setState(() {
       _api = api;
+      _subjects = subjects;
       _profileImage = new NetworkImage(api.firebaseUser.photoUrl);
     });
   }
+  /*
   _loadSubjects() async {
     String fileData = await DefaultAssetBundle.of(context).loadString("assets/subjects.json");
     setState(() {
       _subjects = SubjectApi.allSubjectsFromJson(fileData);
     });
+  }
+  */
+  _reloadSubjects() async {
+    if (_api != null) {
+      final subjects = await _api.getAllSubjects();
+      setState(() {
+        _subjects = subjects;
+      });
+    }
   }
 
   Widget _buildSubjectItem(BuildContext context, int index) {
@@ -108,7 +121,8 @@ class _SubjectListState extends State<SubjectList> {
   }
 
   Future<Null> refresh() {
-    _loadSubjects();
+  //  _loadSubjects();
+    _reloadSubjects();
     return new Future<Null>.value();
   }
 

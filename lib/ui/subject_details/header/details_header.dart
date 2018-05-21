@@ -1,5 +1,5 @@
 import 'package:testscreens/models/subject.dart';
-//import 'package:testscreens/ui/subject_details/header/cut_colored_image.dart';
+import 'package:testscreens/ui/subject_details/header/cut_colored_image.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -25,7 +25,6 @@ class _SubjectDetailHeaderState extends State<SubjectDetailHeader> {
     var textTheme = theme.textTheme;
     var screenWidth = MediaQuery.of(context).size.width;
 
-/*
     var diagonalBackground = new DiagonallyCutColoredImage(
       new Image.asset(
         BACKGROUND_IMAGE,
@@ -35,7 +34,7 @@ class _SubjectDetailHeaderState extends State<SubjectDetailHeader> {
       ),
       color: const Color(0xBB42A5F5),
     );
-*/
+
     var avatar = new Hero(
       tag: widget.avatarTag,
       child: new CircleAvatar(
@@ -104,7 +103,7 @@ class _SubjectDetailHeaderState extends State<SubjectDetailHeader> {
 
     return new Stack(
       children: [
-//        diagonalBackground,
+        diagonalBackground,
         new Align(
           alignment: FractionalOffset.bottomCenter,
           heightFactor: 1.4,

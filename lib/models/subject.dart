@@ -9,7 +9,7 @@ class Subject {
   final int likeCounter;
   final bool isOnline;
   final List<String> pictures;
-  final List<String> tags;
+  final List<String> badges;
 
   Subject({
     @required this.externalId,
@@ -20,7 +20,7 @@ class Subject {
     @required this.likeCounter,
     @required this.isOnline,
     @required this.pictures,
-    @required this.tags,
+    @required this.badges,
   });
 
   @override

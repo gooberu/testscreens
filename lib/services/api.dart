@@ -18,7 +18,7 @@ class SubjectApi {
       likeCounter: map['like_counter'],
       isOnline: map['online'],
       pictures: new List<String>.from(map['pictures']),
-      tags: new List<String>.from(map['tags']),
+      badges: new List<String>.from(map['badges']),
     );
   }
 }

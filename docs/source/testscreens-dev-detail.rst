@@ -210,6 +210,83 @@ Steps
     #. Add some basic state and UI returns to _SubjectDetailsPageState Widget in ui/subject_details/details_page.dart
     #. Call _navigateToSubjectDetails() in the onTap: of the ListTitle in ui/subject_list.dart
 
+#. Add ui BACKGROUND_IMAGE
+
+    #. Create directory images
+    #. Add images/profile_header_background.png
+    #. Add images/profile_header_background.png as asset in pubspec.yaml
+    #. Add lib/ui/subject_details/header/subject_colored_image.dart
+    #. Add static const BACKGROUND_IMAGE = 'images/profile_header_background.png' to _SubjectDetailsPageState in lib/ui/subject_details/header/details_header.dart
+    #. import 'package:testscreens/ui/subject_details/header/subject_colored_image' n lib/ui/subject_details/header/details_header.dart
+    #. use DiagonallyCutColoredImage to load the transformed image into diagonalBackground var
+
+#. Add ui Details section
+
+    #. Add theme to _SubjectDetailBody, add text, style, padding to lib/ui/subject_details/details_body.dart
+    #. Tweak display and icons.. get used to the ui nesting constuction
+    #. Add _createCircleBadge function call to build up icons for future controls
+    #. Add new Padding to pull in the new view
+
+#. Add in Showcase section using tabs
+
+    #. Create lib/ui/subject_details/footer/details_footer.dart 
+    #. Add TabBar and _controller
+    #. Create lib/ui/subject_details/footer/showcase_badges.dart 
+    #. Create lib/ui/subject_details/footer/showcase_pictures.dart 
+    #. Create lib/ui/subject_details/footer/showcase_details.dart 
+    #. Pull in Showcase in lib/ui/subject_details/details_page.dart
+
+#. Finish off Showcase TabBar views
+
+    #. Add font_awesome_flutter to pubspec.yaml
+    #. in showcase_details.dart add call to subject details data object and display
+    #. in showcase_pictures.dart add call to subject pictures (multiple) data objects and display in grid
+    #. in showcase_badges.dart add call to subject badges icon data object and display
+
+#. Run and debug
+
+    #. Debug badges mapping and how object is passed and icons generated
+    #. FIX a assets/subjects.json JSON data file ::
+
+        {
+            "subjects": [
+                {
+                "name": "Chemistry",
+                "online": true,
+                "id": 1,
+                "pictures": [
+                    "http://lorempixel.com/400/200/people",
+                    "http://lorempixel.com/400/200/technics"
+                    ],
+                "like_counter": 2,
+                "location": "St James, WA",
+                "badges": ["TauBetaPi", "Chemistry101Study", "GooberU"],
+                "description": "Test Description 1",
+                "image_url": "http://via.placeholder.com/100x100"
+                },
+                {
+                "name": "Physics",
+                "online": false,
+                "id": 2,
+                "pictures": [
+                    "http://lorempixel.com/400/200/people",
+                    "http://lorempixel.com/400/200/technics"
+                    ],
+                "like_counter": 1,
+                "location": "St James, WA",
+                "badges": ["TauBetaPi", "Physics101Study", "GooberU"],
+                "description": "Test Description 2",
+                "image_url": "http://via.placeholder.com/100x100"
+                }
+            ]
+            }
+
+    #. Fix the naming effects tags -> badges and subjectBadgeLookup
+    #. Consider moving subjectBadgeLookup to another resource... just not now
+    #. Having some cache issues (I think)
+    #. Things seem to work fine just sometimes the pictures are delayed...
+    #. Good enough to snapshot
+
 #. Produce testscreens-checkpoint-04_ Subject List Detail view and navigation
 
    #. Command line ::

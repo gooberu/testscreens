@@ -1,9 +1,9 @@
 import 'package:testscreens/models/subject.dart';
-/*
-import 'package:testscreens/ui/subject_details/footer/showcase_subjecttributes.dart';
+
+import 'package:testscreens/ui/subject_details/footer/showcase_badges.dart';
 import 'package:testscreens/ui/subject_details/footer/showcase_details.dart';
 import 'package:testscreens/ui/subject_details/footer/showcase_pictures.dart';
-*/
+
 import 'package:flutter/material.dart';
 
 class SubjectShowcase extends StatefulWidget {
@@ -27,12 +27,12 @@ class _SubjectShowcaseState extends State<SubjectShowcase>
     _tabs = [
       new Tab(text: 'Pictures'),
       new Tab(text: 'Details'),
-      new Tab(text: 'Tags'),
+      new Tab(text: 'Badges'),
     ];
-    _pages = [ /*
-      new PicturesShowcase(widget.cat),
-      new DetailsShowcase(widget.cat),
-      new CattributesShowcase(widget.cat), */
+    _pages = [ 
+      new PicturesShowcase(widget.subject),
+      new DetailsShowcase(widget.subject),
+      new BadgesShowcase(widget.subject), 
     ];
     _controller = new TabController(
       length: _tabs.length,

@@ -4,6 +4,8 @@ description: Goober Testscreens Flutter application.
 dependencies:
   flutter:
     sdk: flutter
+    
+  font_awesome_flutter: "6.0.0"
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +21,4 @@ flutter:
 
   assets:
     - assets/subjects.json
+    - images/profile_header_background.png

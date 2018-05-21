@@ -10,7 +10,7 @@
             ],
         "like_counter": 2,
         "location": "St James, WA",
-        "tags": ["TauBetaPi", "Chemistry101Study", "GooberU"],
+        "badges": ["TauBetaPi", "Chemistry101Study", "GooberU"],
         "description": "Test Description 1",
         "image_url": "http://via.placeholder.com/100x100"
         },
@@ -24,7 +24,7 @@
             ],
         "like_counter": 1,
         "location": "St James, WA",
-        "tags": ["TauBetaPi", "Physics101Study", "GooberU"],
+        "badges": ["TauBetaPi", "Physics101Study", "GooberU"],
         "description": "Test Description 2",
         "image_url": "http://via.placeholder.com/100x100"
         }

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "931119937625",
+    "firebase_url": "https://gooberu-testscreens.firebaseio.com",
+    "project_id": "gooberu-testscreens",
+    "storage_bucket": "gooberu-testscreens.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931119937625:android:2da6e321b4578b77",
+        "android_client_info": {
+          "package_name": "me.bast23.testscreens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931119937625-iin3krl9afktbep68lrr1dgbhovdgd10.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.bast23.testscreens",
+            "certificate_hash": "c04fe86f6d50e6aba62cab7ff3a774126929ef67"
+          }
+        },
+        {
+          "client_id": "931119937625-sam6q0u2a53vvm2263p0jvkok3tmucfi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa5h9u3rsVgR0lKDu_hSHq1jMkiz3VVVg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931119937625-sam6q0u2a53vvm2263p0jvkok3tmucfi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

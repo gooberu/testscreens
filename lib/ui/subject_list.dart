@@ -12,13 +12,23 @@ class SubjectList extends StatefulWidget {
 
 class _SubjectListState extends State<SubjectList> {
   List<Subject> _subjects = [];
+  SubjectApi _api;
+  NetworkImage _profileImage;
 
   @override
   void initState() {
     super.initState();
     _loadSubjects();
+    _loadFromFirebase();
   }
   
+  _loadFromFirebase() async {
+    final api = await SubjectApi.signInWithGoogle();
+    setState(() {
+      _api = api;
+      _profileImage = new NetworkImage(api.firebaseUser.photoUrl);
+    });
+  }
   _loadSubjects() async {
     String fileData = await DefaultAssetBundle.of(context).loadString("assets/subjects.json");
     setState(() {
@@ -120,6 +130,17 @@ class _SubjectListState extends State<SubjectList> {
     return new Scaffold(
       backgroundColor: Colors.blue,
       body: _buildBody(),
+      floatingActionButton: new FloatingActionButton(
+        onPressed: () {
+          // Do something when FAB is pressed
+        },
+        tooltip: _api != null ? 'Signed-in: ' + _api.firebaseUser.displayName : 'Not Signed-in',
+        backgroundColor: Colors.blue,
+        child: new CircleAvatar(
+          backgroundImage: _profileImage,
+          radius: 50.0,
+        ),
+      ),
     );
   }
 }

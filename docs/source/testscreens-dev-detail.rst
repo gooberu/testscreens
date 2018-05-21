@@ -302,8 +302,98 @@ Steps
         macci:testscreens cat$ git push
         macci:testscreens cat$ git push origin testscreens-checkpoint-04
     
-   #. Verify checkpoint testscreens-checkpoint-04_
+    #. Verify checkpoint testscreens-checkpoint-04_
 
+#. Create Google-Sign-In API Integration for testscreens-checkpoint-05_
+
+    #. Firebase console setup at firebase-console_
+    #. Add Project
+        #. Project name: testscreens
+        #. Project ID: gooberu-testscreens
+        #. Region: United States
+    #. Add Android App to Firebase Project: testscreens
+        #. On firebase-testscreens-console_ click Add Android
+        #. Android package name: me.bast23.testscreens
+        #. App nickname: testscreens
+        #. Debug signing certificate SHA-1 see firebase-debug-cert_
+            #. open a terminal
+            #. keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+            #. Copy Paste SHA-1
+        #. Download google-services.json
+        #. move to android/app/google-services.json
+            #. mv ~/Downloads/google-services.json android/app/
+        #. Add google services to android/build.gradle
+            #. classpath 'com.google.gms:google-services:3.2.0'
+        #. Add apply plugin to android/app/build.gradle AT THE END OF THE FILE
+            #. apply plugin: 'com.google.gms.google-services'
+        #. Add firebase packages to pubspec.yaml
+            #. firebase_core: "0.1.0"
+            #. firebase_auth: "0.5.3"
+            #. cloud_firestore: "0.3.0"
+            #. google_sign_in: "3.0.0"
+        #. flutter run (verify application will still build)
+    #. Add Authentication via google_sign_in
+        #. Goto firebase-console-Authentication_
+        #. Click on "SIGN-IN METHOD"
+        #. Click on Google, then click Enable
+            #. I set Project public-facing name: project-testscreens
+            #. Click "SAVE"
+        #. Edit lib/services/api.dart
+            #. Add imports firebase_auth, google_sign_in and async
+            #. Add calls to FirebaseAuth and GoogleSignIn in class SubjectApi
+        #. Edit lib/ui/cat_list.dart
+            #. Add SubjectApi
+            #. Add NetworkImage
+            #. Add _loadFromFirebase() async
+            #. Call _loadFromFirebase() in the initState
+            #. Add floating action button to UI
+            #. Attach google_sign_in indication to tool-tip
+            #. Add backgroundImage: _profileImage
+        #. flutter run
+
+#. Produce testscreens-checkpoint-05_ Google-Sign-In API Integration
+
+   #. Command line ::
+
+        macci:testscreens cat$ cd ~/bast23/testscreens/docs
+        macci:docs cat$ vi source/testscreens-dev-detail.rst (update doc)
+        macci:docs cat$ make html 
+        macci:docs cat$ open build/html/index.html (verify docs)
+        macci:testscreens cat$ cd ~/bast23/testscreens
+        macci:testscreens cat$ git add *
+        macci:testscreens cat$ git commit -m "commit for testscreens-checkpoint-05 - Google-Sign-In API Integration"
+        macci:testscreens cat$ git tag testscreens-checkpoint-05
+        macci:testscreens cat$ git push
+        macci:testscreens cat$ git push origin testscreens-checkpoint-05
+    
+   #. Verify checkpoint testscreens-checkpoint-05_
+
+
+
+Action Template
+---------------
+
+#. Create NAME_OF_GOAL for testscreens-checkpoint-NN_
+
+    #. tbd 
+    #. tbd 
+
+#. Produce testscreens-checkpoint-NN_ NAME_OF_GOAL
+
+   #. Command line ::
+
+        macci:testscreens cat$ cd ~/bast23/testscreens/docs
+        macci:docs cat$ vi source/testscreens-dev-detail.rst (update doc)
+        macci:docs cat$ make html 
+        macci:docs cat$ open build/html/index.html (verify docs)
+        macci:testscreens cat$ cd ~/bast23/testscreens
+        macci:testscreens cat$ git add *
+        macci:testscreens cat$ git commit -m "commit for testscreens-checkpoint-NN - NAME_OF_GOAL"
+        macci:testscreens cat$ git tag testscreens-checkpoint-NN
+        macci:testscreens cat$ git push
+        macci:testscreens cat$ git push origin testscreens-checkpoint-NN
+    
+   #. Verify checkpoint testscreens-checkpoint-NN_
 
 Resources
 ---------
@@ -311,13 +401,23 @@ Resources
 #. Github Project Repo: gooberu-testscreens-github_
 #. Read the Docs: gooberu-testscreens-readthedocs_
 #. Ubuntu Font Family at download-UbuntuFontFamily_
+#. Firebase console (based on google login) firebase-console_
+#. Firebase testscreens console firebase-testscreens-console_
+#. Firebase debug cert help firebase-debug-cert_
+#. firebase-console-Authentication_
 
 .. _readthedocs: https://readthedocs.org/
 .. _gooberu-testscreens-readthedocs: http://testscreens.readthedocs.io/en/latest/
 .. _gooberu-testscreens-github: https://github.com/gooberu/testscreens
 .. _download-UbuntuFontFamily: https://fonts.google.com/download?family=Ubuntu
+.. _firebase-console: https://console.firebase.google.com/
+.. _firebase-console-Authentication: https://console.firebase.google.com/project/gooberu-testscreens/authentication/users
+.. _firebase-testscreens-console: https://console.firebase.google.com/project/gooberu-testscreens/overview
+.. _firebase-debug-cert: https://developers.google.com/android/guides/client-auth
+.. _testscreens-checkpoint-NN: https://github.com/gooberu/testscreens
 .. _testscreens-checkpoint-01: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-01
 .. _testscreens-checkpoint-02: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-02
 .. _testscreens-checkpoint-03: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-03
 .. _testscreens-checkpoint-04: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-04
+.. _testscreens-checkpoint-05: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-05
 

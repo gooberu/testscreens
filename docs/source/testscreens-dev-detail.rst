@@ -447,7 +447,76 @@ Steps
     
    #. Verify checkpoint testscreens-checkpoint-06_
 
+#. Create Cloud Functions for testscreens-checkpoint-07_
 
+    #. Goto firebase-testscreens-Functions_
+    #. Click Functions "Get Started"
+    #. sudo npm install -g firebase-tools 
+    #. cd ~/bast23/testscreens
+    #. firebase login
+    #. firebase init
+        #. Firestore
+        #. Functions
+        #. Storage
+        #. Firebase Project: testscreens (gooberu-testscreens)
+        #. Firestore Rules: (use default)
+        #. Firestore indexes: (use default)
+        #. Language for Cloud Functions: JavaScript
+        #. use ESLint: no
+        #. Install dependencies with npm: Y
+        #. Storage Rules: (use default)
+    #. Update firestore.rules with the following::
+
+        //
+        // General Firestore Rules.
+        //
+        service cloud.firestore {
+        match /databases/{database}/documents {
+            // Allow public read access to all cats.
+            match /cats/{catId} {
+            allow read;
+            }
+            // Documents representing likes should be private to their owning users.
+            match /likes/{likeId} {
+            allow create: if isSignedIn()
+                            && request.resource.data.size() == 0
+                            && exists(/databases/$(database)/documents/cats/$(catIdFromLikeId(likeId)));
+            allow get, delete: if isSignedIn()
+                                    && userIdFromLikeId(likeId) == request.auth.uid;
+            }
+            function isSignedIn() {
+            return request.auth != null;
+            }
+            function catIdFromLikeId(likeId) {
+            return likeId.split(':')[0]
+            }
+            function userIdFromLikeId(likeId) {
+            return likeId.split(':')[1];
+            }
+        }
+        }
+
+
+
+
+
+
+#. Produce testscreens-checkpoint-07_ Cloud Functions
+
+   #. Command line ::
+
+        macci:testscreens cat$ cd ~/bast23/testscreens/docs
+        macci:docs cat$ vi source/testscreens-dev-detail.rst (update doc)
+        macci:docs cat$ make html 
+        macci:docs cat$ open build/html/index.html (verify docs)
+        macci:testscreens cat$ cd ~/bast23/testscreens
+        macci:testscreens cat$ git add *
+        macci:testscreens cat$ git commit -m "commit for testscreens-checkpoint-07 - Cloud Functions"
+        macci:testscreens cat$ git tag testscreens-checkpoint-07
+        macci:testscreens cat$ git push
+        macci:testscreens cat$ git push origin testscreens-checkpoint-07
+    
+   #. Verify checkpoint testscreens-checkpoint-07_
 
 
 

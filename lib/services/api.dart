@@ -69,6 +69,7 @@ class SubjectApi {
 
   static Subject _fromMap(Map<String, dynamic> map) {
     return new Subject(
+      documentId: map['documentId'],
       externalId: map['id'],
       name: map['name'],
       description: map['description'],

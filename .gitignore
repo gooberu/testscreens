@@ -1,15 +1,26 @@
 .DS_Store
 .dart_tool/
-
 .packages
 .pub/
-
 build/
-
+ios/.generated/
+packages
 .flutter-plugins
+*.psd
+
+functions/node_modules
+
+## Google API files
+# GoogleService-Info.plist
+# google-services.json
+
+## Keys
+# testscreens.jks
+# key.properties
 
 #######################
 # readthedocs gitignore
 
 # sphinx build folder
 docs/build/
+

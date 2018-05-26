@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:testscreens/models/subject.dart';
+import 'package:testscreens/services/api.dart';
 import 'package:testscreens/ui/subject_details/header/cut_colored_image.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -18,6 +20,66 @@ class SubjectDetailHeader extends StatefulWidget {
 
 class _SubjectDetailHeaderState extends State<SubjectDetailHeader> {
   static const BACKGROUND_IMAGE = 'images/profile_header_background.png';
+
+  bool _likeDisabled = true;
+  String _likeText = "";
+  int _likeCounter = 0;
+  StreamSubscription _watcher;
+
+  Future<SubjectApi> _api;
+
+  void likeSubject() async {
+    // TODO: Create proper singleton.
+    final api = await _api;
+    if (await api.hasLikedSubject(widget.subject)) {
+      api.unlikeSubject(widget.subject);
+      setState(() {
+        _likeCounter -= 1;
+        _likeText = "LIKE";
+      });
+    } else {
+      api.likeSubject(widget.subject);
+      setState(() {
+        _likeCounter += 1;
+        _likeText = "UN-LIKE";
+      });
+    }
+  }
+
+  void updateLikeState() async {
+    final api = await _api;
+    _watcher = api.watch(widget.subject, (subject) {
+      if (mounted) {
+        setState(() {
+          _likeCounter = subject.likeCounter;
+        });
+      }
+    });
+
+    bool liked = await api.hasLikedSubject(widget.subject);
+    if (mounted) {
+      setState(() {
+        _likeDisabled = false;
+        _likeText = liked ? "UN-LIKE" : "LIKE";
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _likeCounter = widget.subject.likeCounter;
+    _api = SubjectApi.signInWithGoogle();
+    updateLikeState();
+  }
+
+  @override
+  void dispose() {
+    if (_watcher != null) {
+      _watcher.cancel();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +118,8 @@ class _SubjectDetailHeaderState extends State<SubjectDetailHeader> {
           new Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: new Text(
-              widget.subject.likeCounter.toString(),
+              // widget.subject.likeCounter.toString(),
+              _likeCounter.toString(),
               style: textTheme.subhead.copyWith(color: Colors.white),
             )
           )
@@ -91,10 +154,9 @@ class _SubjectDetailHeaderState extends State<SubjectDetailHeader> {
               color: Colors.lightGreen,
               disabledColor: Colors.grey,
               textColor: Colors.white,
-              onPressed: () async {
-                //TODO Handle Like
-              },
-              child: new Text('LIKE'),
+              onPressed: _likeDisabled ? null : likeSubject,
+              //child: new Text('LIKE'),
+              child: new Text(_likeText),
             ),
           ),
         ],

@@ -11,12 +11,12 @@ packages
 functions/node_modules
 
 ## Google API files
-# GoogleService-Info.plist
-# google-services.json
+GoogleService-Info.plist
+google-services.json
 
 ## Keys
-# testscreens.jks
-# key.properties
+testscreens.jks
+key.properties
 
 #######################
 # readthedocs gitignore

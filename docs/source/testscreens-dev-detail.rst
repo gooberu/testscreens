@@ -465,41 +465,86 @@ Steps
         #. use ESLint: no
         #. Install dependencies with npm: Y
         #. Storage Rules: (use default)
+
     #. Update firestore.rules with the following::
 
         //
         // General Firestore Rules.
         //
         service cloud.firestore {
-        match /databases/{database}/documents {
-            // Allow public read access to all cats.
-            match /cats/{catId} {
-            allow read;
-            }
-            // Documents representing likes should be private to their owning users.
-            match /likes/{likeId} {
-            allow create: if isSignedIn()
-                            && request.resource.data.size() == 0
-                            && exists(/databases/$(database)/documents/cats/$(catIdFromLikeId(likeId)));
-            allow get, delete: if isSignedIn()
-                                    && userIdFromLikeId(likeId) == request.auth.uid;
-            }
-            function isSignedIn() {
-            return request.auth != null;
-            }
-            function catIdFromLikeId(likeId) {
-            return likeId.split(':')[0]
-            }
-            function userIdFromLikeId(likeId) {
-            return likeId.split(':')[1];
+            match /databases/{database}/documents {
+                // Allow public read access to all subjects.
+                match /subjects/{subjectId} {
+                    allow read;
+                }
+                // Documents representing likes should be private to their owning users.
+                match /likes/{likeId} {
+                    allow create: if isSignedIn()
+                                && request.resource.data.size() == 0
+                                && exists(/databases/$(database)/documents/subjects/$(subjectIdFromLikeId(likeId)));
+                    allow get, delete: if isSignedIn()
+                                        && userIdFromLikeId(likeId) == request.auth.uid;
+                }
+                function isSignedIn() {
+                    return request.auth != null;
+                }
+                function subjectIdFromLikeId(likeId) {
+                    return likeId.split(':')[0]
+                }
+                function userIdFromLikeId(likeId) {
+                    return likeId.split(':')[1];
+                }
             }
         }
+
+    #. Update storage.rules with the following::
+
+        service firebase.storage {
+            match /b/{bucket}/o {
+                match /{allPaths=**} {
+                    allow read;
+                }
+            }
         }
 
+    #. Verify you can create likes document location in firebase-testscreens-Database_
+    #. Delete likes document
+    #. Deploy firebase changes
+        #. firebase deploy
+    #. Write likes cloud function in functions/index.js
+    #. cd ~/bast23/testscreens/functions
+    #. npm install
+    #. cd ~/bast23/testscreens
+    #. firebase deploy
+    #. Had an error... looked at ; ... deployed again and it worked
+    #. Update .gitignore
+    #. git add *
+    #. git commit -m "Working push to Firebase Functions"
 
+#. Add cloud functions to application
+    #. Edit lib/services/api.dart
+        #. Add Future likeSubject(Subject subject) async {....}
+        #. Add Future unlikeSubject(Subject subject) async {....}
+        #. Add Future hasLikedSubject(Subject subject) async {....}
+    #. Edit lib/ui/subject_details/header/details_header.dart
+        #. import 'dart:async';
+        #. import 'package:testscreens/services/api.dart';
+        #. Add _likeDisabled, _likeText and _likeCounter logic to _CatDetailHeaderState
+        #. Add StreamSubscription _watcher;
+        #. Add Future<SubjectApi> _api;
+        #. Add the async logic for dynamic like button logic
 
+#. Issues with .gitignore
+    #. Got the following message:: 
 
+        Warning: GitGuardian detected an API key from Google
+        Hello @christrees
+        GitGuardian detected an API key from Google in the following commit from gooberu/testscreens pushed at 2018-05-21T20:35:19Z.
+        GitGuardian, or "GG", is a "Good Guy" bot scanning in real time GitHub commits for sensitive information.
+        Once you have pushed sensitive information to GitHub, this information is public and should be considered compromised. We just open sourced our GitHub repository to help developers take appropriate actions. Would love a star! :)
+        Accidents happened to the best of us and will continue to happen. Sign up to our service to be notified if this happens again. We got a free tier for individual developers !
 
+    #. Mod .gitignore to ignore keys
 
 #. Produce testscreens-checkpoint-07_ Cloud Functions
 

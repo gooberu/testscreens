@@ -81,4 +81,28 @@ class SubjectApi {
       badges: new List<String>.from(map['badges']),
     );
   }
+
+  Future likeSubject(Subject subject) async {
+    await Firestore.instance
+        .collection('likes')
+        .document('${subject.documentId}:${this.firebaseUser.uid}')
+        .setData({});
+  }
+
+  Future unlikeSubject(Subject subject) async {
+    await Firestore.instance
+        .collection('likes')
+        .document('${subject.documentId}:${this.firebaseUser.uid}')
+        .delete();
+  }
+
+  Future<bool> hasLikedSubject(Subject subject) async {
+    final like = await Firestore.instance
+        .collection('likes')
+        .document('${subject.documentId}:${this.firebaseUser.uid}')
+        .get();
+
+    return like.exists;
+  }
+
 }

@@ -304,7 +304,7 @@ Steps
     
     #. Verify checkpoint testscreens-checkpoint-04_
 
-#. Create Google-Sign-In API Integration for testscreens-checkpoint-05_
+#. Create Android Google-Sign-In API Integration for testscreens-checkpoint-05_
 
     #. Firebase console setup at firebase-console_
     #. Add Project
@@ -351,7 +351,7 @@ Steps
             #. Add backgroundImage: _profileImage
         #. flutter run
 
-#. Produce testscreens-checkpoint-05_ Google-Sign-In API Integration
+#. Produce testscreens-checkpoint-05_ Android Google-Sign-In API Integration
 
    #. Command line ::
 
@@ -563,7 +563,75 @@ Steps
     
    #. Verify checkpoint testscreens-checkpoint-07_
 
+#. Create iOS Google-Sign-In API Integration for testscreens-checkpoint-08_
 
+    #. Firebase console setup at firebase-console_
+    #. Edit testcreens Project
+        #. Project name: testscreens
+        #. Project ID: gooberu-testscreens
+        #. Region: United States
+    #. Add iOS App to Firebase Project: testscreens
+        #. On firebase-testscreens-console_ click Add iOS
+        #. iOS package name: me.bast23.testscreens
+        #. App nickname: testscreens
+        #. App Store ID (optional): leave blank for now
+        #. Click "Resister APP"
+    #. Download GoogleService-Info.plist
+        #. move to ios/Runner/GoogleService-Info.plist
+            #. mv ~/Downloads/GoogleService-Info.plist ios/Runner/GoogleService-Info.plist
+            #. NOTE: best if you move this via xcode IDE as xcode will add to project properly
+        #. Edit ios/Runner/info.plist and insert between outer <dict></dict> ::
+
+            <!-- Place between dict and after the following key -->
+            <key>UIViewControllerBasedStatusBarAppearance</key>
+            <false/>
+            <!-- Google Sign-in Section -->
+            <key>CFBundleURLTypes</key>
+            <array>
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <!-- Copied from GoogleServices-Info.plist key REVERSE_CLIENT_ID -->
+                        <string>com.googleusercontent.apps.466218294969-5mdmh6opkqd87a5m81nm83u4eqd3bvgk</string>
+                    </array>
+                </dict>
+            </array>
+            <!-- End of the Google Sign-in Section -->
+
+    #. Add Firebase SDK via CocoaPods
+        #. cd ~/bast23/testcreens/ios
+        #. pod install
+        #. NOTE: I had some issues with pod and xcode
+        #. Useful tutorial youtube-FlutterWireUpFirebaseAuthiOS_
+        #. cd ~/bast23/testscreens
+        #. flutter build ios
+        #. Fire up xcode and select a team (for the bundel key stuff)
+        #. NOTE: More issues but I think it was because the GoogleServices-Info.plist mod I was using was wrong.  When I corrected the info.plist with the ABOVE mod, the other hacks I did were backed out and everything seemed to work as expected.
+        #. NOTE: Mods made ( ///-cathack mistake ) and backed out:
+            #. ~/bast23/testscreens/ios/Runner/Runner/AppDelegate.m
+            #. ~/bast23/testscreens/ios/Runner/Runner/AppDelegate.h
+    #. flutter devices (list the devices)
+    #. flutter run -d all (run the app on all connected devices)
+    #. flutter run (verify application will still build)
+
+#. Produce testscreens-checkpoint-08_ iOS Google-Sign-In API Integration
+
+   #. Command line ::
+
+        macci:testscreens cat$ cd ~/bast23/testscreens/docs
+        macci:docs cat$ vi source/testscreens-dev-detail.rst (update doc)
+        macci:docs cat$ make html
+        macci:docs cat$ open build/html/index.html (verify docs)
+        macci:testscreens cat$ cd ~/bast23/testscreens
+        macci:testscreens cat$ git add *
+        macci:testscreens cat$ git commit -m "commit for testscreens-checkpoint-08 - Google-Sign-In API Integration"
+        macci:testscreens cat$ git tag testscreens-checkpoint-08
+        macci:testscreens cat$ git push
+        macci:testscreens cat$ git push origin testscreens-checkpoint-08
+
+   #. Verify checkpoint testscreens-checkpoint-08_
 
 
 
@@ -607,6 +675,7 @@ Resources
 #. firebase-testscreens-Storage_
 #. firebase-testscreens-Storage-Rules_
 #. firebase-testscreens-Storage-Files_
+#. youtube-FlutterWireUpFirebaseAuthiOS_
 
 
 .. _readthedocs: https://readthedocs.org/
@@ -621,6 +690,7 @@ Resources
 .. _firebase-testscreens-Storage: https://console.firebase.google.com/project/gooberu-testscreens/storage/gooberu-testscreens.appspot.com/files
 .. _firebase-testscreens-Storage-Rules: https://console.firebase.google.com/project/gooberu-testscreens/storage/gooberu-testscreens.appspot.com/rules
 .. _firebase-testscreens-Storage-Files: https://console.firebase.google.com/project/gooberu-testscreens/storage/gooberu-testscreens.appspot.com/files
+.. _firebase-testscreens-Functions: https://console.firebase.google.com/project/gooberu-testscreens/functions/list
 .. _firebase-debug-cert: https://developers.google.com/android/guides/client-auth
 .. _testscreens-checkpoint-NN: https://github.com/gooberu/testscreens
 .. _testscreens-checkpoint-01: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-01
@@ -629,4 +699,7 @@ Resources
 .. _testscreens-checkpoint-04: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-04
 .. _testscreens-checkpoint-05: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-05
 .. _testscreens-checkpoint-06: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-06
+.. _testscreens-checkpoint-07: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-07
+.. _testscreens-checkpoint-08: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-08
 
+.. _youtube-FlutterWireUpFirebaseAuthiOS: https://www.youtube.com/watch?v=3nFIMej3Tvw

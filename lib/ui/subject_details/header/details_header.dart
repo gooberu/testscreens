@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:testscreens/models/subject.dart';
 import 'package:testscreens/services/api.dart';
+import 'package:testscreens/ui/subject_chat.dart';
 import 'package:testscreens/ui/subject_details/header/cut_colored_image.dart';
+import 'package:testscreens/ui/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -63,6 +65,17 @@ class _SubjectDetailHeaderState extends State<SubjectDetailHeader> {
         _likeText = liked ? "UN-LIKE" : "LIKE";
       });
     }
+  }
+
+  _navigateToSubjectChat() {
+    Navigator.of(context).push(
+      new FadePageRoute(
+        builder: (c) {
+          return new SubjectChat();
+        },
+        settings: new RouteSettings(),
+      ),
+    );
   }
 
   @override
@@ -142,9 +155,9 @@ class _SubjectDetailHeaderState extends State<SubjectDetailHeader> {
               minWidth: 140.0,
               color: theme.accentColor,
               textColor: Colors.white,
-              onPressed: () async {
+              onPressed: () => _navigateToSubjectChat(), /*() async {
                 //TODO Handle Adopt
-              },
+              },*/
               child: new Text('GooberU Alert'),
             ),
           ),

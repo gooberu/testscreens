@@ -717,8 +717,8 @@ Steps
 
 #. Create NAME_OF_GOAL for testscreens-checkpoint-NN_
 
-    #. tbd  
-    #. tbd 
+    #. github-projects-configure-projects_ setup kanban board
+    #. Setup "Subject Chat Page" lib/ui/subject_chat.dart
 
 #. Produce testscreens-checkpoint-NN_ NAME_OF_GOAL
 
@@ -848,8 +848,10 @@ Resources
 .. _readthedocs: https://readthedocs.org/
 .. _gooberu-testscreens-readthedocs: http://testscreens.readthedocs.io/en/latest/
 .. _gooberu-testscreens-github: https://github.com/gooberu/testscreens
+.. _gooberu-testscreens-release-sprints: https://github.com/gooberu/testscreens/projects
 .. _gooberu-docs-Architecture: https://docs.google.com/document/d/1FvM15Qytp0HsxGR6Tm3dTKDvYsCZbecjis9G_oCLgo8
 .. _download-UbuntuFontFamily: https://fonts.google.com/download?family=Ubuntu
+
 .. _firebase-console: https://console.firebase.google.com/
 .. _firebase-testscreens-console: https://console.firebase.google.com/project/gooberu-testscreens/overview
 .. _firebase-testscreens-Authentication: https://console.firebase.google.com/project/gooberu-testscreens/authentication/users
@@ -861,6 +863,8 @@ Resources
 .. _firebase-testscreens-Functions: https://console.firebase.google.com/project/gooberu-testscreens/functions/list
 .. _firebase-debug-cert: https://developers.google.com/android/guides/client-auth
 .. _firebase-docs-database-query: https://firebase.google.com/docs/reference/js/firebase.database.Query
+.. _firebase-docs-sheets-connector: https://sites.google.com/site/scriptsexamples/new-connectors-to-google-services/firebase/tutorials
+
 .. _ios-docs-testflight: https://developer.apple.com/testflight/
 .. _apple-developer-portal: https://developer.apple.com/account/
 .. _apple-developer-bundle-create: https://developer.apple.com/account/ios/identifier/bundle
@@ -885,3 +889,5 @@ Resources
 .. _youtube-FlutterWireUpFirebaseAuthiOS: https://www.youtube.com/watch?v=3nFIMej3Tvw
 .. _youtube-ios-tutorial-testflight-1: https://www.youtube.com/watch?v=1CcCKQHjDpw
 .. _youtube-ios-tutorial-testflight-2: https://www.youtube.com/watch?v=1DVLaMmGxR8
+
+.. _github-projects-configure-projects: https://help.github.com/articles/configuring-automation-for-project-boards/

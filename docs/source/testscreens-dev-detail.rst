@@ -633,6 +633,169 @@ Steps
 
    #. Verify checkpoint testscreens-checkpoint-08_
 
+#. Setup iOS TestFlight for testscreens-checkpoint-09_
+
+    #. Open testscreens in xcode  
+    #. Runner -> General -> Display Name: GooberU
+    #. Product -> Achive ( this will take a while to run Version 0.1.0 built 1 ) 
+    #. BUILD FAIL: looking at output::
+
+        ========================================================================
+        ERROR: Flutter archive builds must be run in Release mode.
+
+        To correct, run:
+        flutter build ios --release
+
+        then re-run Archive from Xcode.
+        ========================================================================
+        Command /bin/sh failed with exit code 255
+
+    #. flutter build ios --release
+    #. re-run Product -> Achive ( this will take a while to run Version 0.1.0 built 1 ) 
+    #. Eventually you should get the Window -> Organizer view of builds where you can make notes.
+    #. Click "Upload to App Store"
+        #. Accept Defaults..
+        #. Generate an iOS Distribution certificate.
+        #. Export Signing certificate to ~/bast23/SigningCerts
+        #. Should get Review Runner.ipa screenshot to ~/bast23/SigningCerts/GooberU-Runner-ipa-2018-05-26at4.56.17PM
+        #. Export to ~/bast23/SigningCerts/GooberU-Runner2018-05-26at16-59-45
+        #. Click "Upload"
+    #. Got Error "No suitable application records were found" for me.bast23.testscreens
+    #. Click "Export" and save to ~/bast23/SigningCerts/GooberU-ERROR-Runner2018-05-26at17-02-03
+    #. Goto apple-developer-portal_ login
+    #. Goto apple-developer-bundle-create_
+        #. Name: GooberU TestScreens
+        #. App ID Prefix: 32S72FZ9Z5 (Team ID)
+        #. App ID Suffix (Bundle ID): me.bast23.testscreens
+        #. Use Default App services
+        #. Click "Continue"
+        #. App ID Description:GooberU TestscreensIdentifier:32S72FZ9Z5.me.bast23.testcreens
+        #. Click "Register"
+        #. Click "Done"
+    #. Goto apple-itunesconnect-portal_
+        #. New App
+            #. ~/bast23/SigningCerts/GooberU-itunes-newApp-ScreenShot2018-05-26at5.21.40PM
+            #. Name: GooberU-Testscreens
+            #. Language: English(U.S.)
+            #. Bundle ID: GooberU Testscreens - me.bast23.testscreens
+            #. SKU: 333666999
+    #. Click "Upload to App Store"
+        #. Accept Defaults..
+        #. Generate an iOS Distribution certificate.
+        #. Export Signing certificate to ~/bast23/SigningCerts
+        #. Export to ~/bast23/SigningCerts/GooberU-Runner2018-05-26at17-16-41
+        #. Click "Upload"
+        #. Wait... should get "Upload Successful"
+        #. Click "Done"
+    #. Goto apple-itunesconnect-portal_
+        #. My Apps -> GooberU-Testscreens
+        #. Fill out "Test Information"
+        #. Click on warning in "iOS Builds" and accept the encryption "No" waring
+    #. Goto apple-itunesconnect-user-roles_
+        #. Add users to test
+        #. Don't messup the email (woops)
+        #. Assign roles 
+    #. Goto apple-itunesconnect-GooberU-Testscreens-testflight_
+        #. Add iTunes Connect Users (internal test)
+
+#. Produce testscreens-checkpoint-09_ Setup iOS TestFlight
+
+   #. Command line ::
+
+        macci:testscreens cat$ cd ~/bast23/testscreens/docs
+        macci:docs cat$ vi source/testscreens-dev-detail.rst (update doc)
+        macci:docs cat$ make html 
+        macci:docs cat$ open build/html/index.html (verify docs)
+        macci:testscreens cat$ cd ~/bast23/testscreens
+        macci:testscreens cat$ git add *
+        macci:testscreens cat$ git commit -m "commit for testscreens-checkpoint-09 - Setup iOS TestFlight"
+        macci:testscreens cat$ git tag testscreens-checkpoint-09
+        macci:testscreens cat$ git push
+        macci:testscreens cat$ git push origin testscreens-checkpoint-09
+    
+   #. Verify checkpoint testscreens-checkpoint-09_
+
+#. Create NAME_OF_GOAL for testscreens-checkpoint-NN_
+
+    #. tbd  
+    #. tbd 
+
+#. Produce testscreens-checkpoint-NN_ NAME_OF_GOAL
+
+   #. Command line ::
+
+        macci:testscreens cat$ cd ~/bast23/testscreens/docs
+        macci:docs cat$ vi source/testscreens-dev-detail.rst (update doc)
+        macci:docs cat$ make html 
+        macci:docs cat$ open build/html/index.html (verify docs)
+        macci:testscreens cat$ cd ~/bast23/testscreens
+        macci:testscreens cat$ git add *
+        macci:testscreens cat$ git commit -m "commit for testscreens-checkpoint-NN - NAME_OF_GOAL"
+        macci:testscreens cat$ git tag testscreens-checkpoint-NN
+        macci:testscreens cat$ git push
+        macci:testscreens cat$ git push origin testscreens-checkpoint-NN
+    
+   #. Verify checkpoint testscreens-checkpoint-NN_
+
+#. Create GooberU-UserRequestResponse transactions for testscreens-checkpoint-11_
+    #. Open gooberu-docs-Architecture_ and review GooberU-UserRequestResponse Event Model
+    #. Goto firebase-testscreens-Database_
+    #. Create ~/bast23/testscreens/assets/providers.json
+    #. Add new Collection: providers
+    #. Manually add the providers.json data structure
+        #. cp assets/subjects.json assets/providers.json
+        #. Fix providers.json data to aling with gooberu-docs-Architecture_
+    #. Manually add lib/models/provider.dart
+        #. cp lib/models/subject.dart lib/models/provider.dart
+        #. Fix provider.dart model to aling with gooberu-docs-Architecture_
+    #. Add class ProviderApi to lib/services/api.dart and fixup errors
+        #. import 'package:testscreens/models/provider.dart'
+        #. Add _fromDocumentSnapshot to Provider extension
+        #. Add Future<List<Provider>> getAllProviders
+        #. Add StreemSubscription to Provider
+    #. Create lib/ui/provider_list.dart 
+        #. ??
+    #. Create lib/ui/provider_details/... ??
+        #. For now just mod'n subject_details screen to get the screen flow idea...
+    #. tbd
+    #. Click "RULES" which is firebase-testscreens-Database-Rules_
+    #. Change Rule to Following::
+
+        service cloud.firestore {
+            match /databases/{database}/documents {
+
+                //Allow public read access to all subjects
+                match /subjects/{subjectId} {
+                    allow read;
+                }
+                //Allow public read access to all providers
+                match /providers/{providerId} {
+                    allow read;
+                }                
+                function isSignedIn() {
+                    return request.auth != null;
+                }
+            }
+        }
+
+    #. flutter run (test it)
+
+#. Produce testscreens-checkpoint-11_ GooberU-UserRequestResponse transactions
+
+   #. Command line ::
+
+        macci:testscreens cat$ cd ~/bast23/testscreens/docs
+        macci:docs cat$ vi source/testscreens-dev-detail.rst (update doc)
+        macci:docs cat$ make html 
+        macci:docs cat$ open build/html/index.html (verify docs)
+        macci:testscreens cat$ cd ~/bast23/testscreens
+        macci:testscreens cat$ git add *
+        macci:testscreens cat$ git commit -m "commit for testscreens-checkpoint-11 - GooberU-UserRequestResponse transactions"
+        macci:testscreens cat$ git tag testscreens-checkpoint-11
+        macci:testscreens cat$ git push
+        macci:testscreens cat$ git push origin testscreens-checkpoint-11
+    
+   #. Verify checkpoint testscreens-checkpoint-11_
 
 
 Action Template
@@ -640,7 +803,7 @@ Action Template
 
 #. Create NAME_OF_GOAL for testscreens-checkpoint-NN_
 
-    #. tbd 
+    #. tbd  
     #. tbd 
 
 #. Produce testscreens-checkpoint-NN_ NAME_OF_GOAL
@@ -665,6 +828,7 @@ Resources
 
 #. Github Project Repo: gooberu-testscreens-github_
 #. Read the Docs: gooberu-testscreens-readthedocs_
+#. GooberU site Architecture document at gooberu-docs-Architecture_
 #. Ubuntu Font Family at download-UbuntuFontFamily_
 #. Firebase console (based on google login) firebase-console_
 #. Firebase testscreens console firebase-testscreens-console_
@@ -675,12 +839,16 @@ Resources
 #. firebase-testscreens-Storage_
 #. firebase-testscreens-Storage-Rules_
 #. firebase-testscreens-Storage-Files_
+#. firebase-docs-database-query_
 #. youtube-FlutterWireUpFirebaseAuthiOS_
+#. Testflight documentation ios-docs-testflight_
+#. Testflight Tutorial youtube-ios-tutorial-testflight-1_
 
 
 .. _readthedocs: https://readthedocs.org/
 .. _gooberu-testscreens-readthedocs: http://testscreens.readthedocs.io/en/latest/
 .. _gooberu-testscreens-github: https://github.com/gooberu/testscreens
+.. _gooberu-docs-Architecture: https://docs.google.com/document/d/1FvM15Qytp0HsxGR6Tm3dTKDvYsCZbecjis9G_oCLgo8
 .. _download-UbuntuFontFamily: https://fonts.google.com/download?family=Ubuntu
 .. _firebase-console: https://console.firebase.google.com/
 .. _firebase-testscreens-console: https://console.firebase.google.com/project/gooberu-testscreens/overview
@@ -692,6 +860,14 @@ Resources
 .. _firebase-testscreens-Storage-Files: https://console.firebase.google.com/project/gooberu-testscreens/storage/gooberu-testscreens.appspot.com/files
 .. _firebase-testscreens-Functions: https://console.firebase.google.com/project/gooberu-testscreens/functions/list
 .. _firebase-debug-cert: https://developers.google.com/android/guides/client-auth
+.. _firebase-docs-database-query: https://firebase.google.com/docs/reference/js/firebase.database.Query
+.. _ios-docs-testflight: https://developer.apple.com/testflight/
+.. _apple-developer-portal: https://developer.apple.com/account/
+.. _apple-developer-bundle-create: https://developer.apple.com/account/ios/identifier/bundle
+.. _apple-itunesconnect-portal: https://itunesconnect.apple.com/
+.. _apple-itunesconnect-user-roles: https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/users_roles
+.. _apple-itunesconnect-GooberU-Testscreens-Testflight: https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1390293846/testflight?section=internaltesters&subsection=testers
+
 .. _testscreens-checkpoint-NN: https://github.com/gooberu/testscreens
 .. _testscreens-checkpoint-01: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-01
 .. _testscreens-checkpoint-02: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-02
@@ -701,5 +877,11 @@ Resources
 .. _testscreens-checkpoint-06: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-06
 .. _testscreens-checkpoint-07: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-07
 .. _testscreens-checkpoint-08: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-08
+.. _testscreens-checkpoint-09: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-09
+.. _testscreens-checkpoint-10: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-10
+.. _testscreens-checkpoint-11: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-11
+.. _testscreens-checkpoint-12: https://github.com/gooberu/testscreens/tree/testscreens-checkpoint-12
 
 .. _youtube-FlutterWireUpFirebaseAuthiOS: https://www.youtube.com/watch?v=3nFIMej3Tvw
+.. _youtube-ios-tutorial-testflight-1: https://www.youtube.com/watch?v=1CcCKQHjDpw
+.. _youtube-ios-tutorial-testflight-2: https://www.youtube.com/watch?v=1DVLaMmGxR8

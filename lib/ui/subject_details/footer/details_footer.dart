@@ -25,7 +25,7 @@ class _SubjectShowcaseState extends State<SubjectShowcase>
   initState() {
     super.initState();
     _tabs = [
-      new Tab(text: 'Pictures'),
+      new Tab(text: 'Providers'),  //cathack was 'Pictures'
       new Tab(text: 'Details'),
       new Tab(text: 'Badges'),
     ];

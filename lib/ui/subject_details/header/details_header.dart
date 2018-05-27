@@ -145,7 +145,7 @@ class _SubjectDetailHeaderState extends State<SubjectDetailHeader> {
               onPressed: () async {
                 //TODO Handle Adopt
               },
-              child: new Text('Ping Me'),
+              child: new Text('GooberU Alert'),
             ),
           ),
           new ClipRRect(

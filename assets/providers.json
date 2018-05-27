@@ -1,0 +1,32 @@
+{
+    "providers": [
+        {
+        "name": "Provider One",
+        "online": true,
+        "id": 1,
+        "pictures": [
+            "http://lorempixel.com/400/200/people",
+            "http://lorempixel.com/400/200/technics"
+            ],
+        "like_counter": 2,
+        "location": "St James, WA",
+        "badges": ["TauBetaPi", "Chemistry101Study", "GooberU"],
+        "description": "Test Description 1",
+        "image_url": "http://via.placeholder.com/100x100"
+        },
+        {
+        "name": "Provider Two",
+        "online": false,
+        "id": 2,
+        "pictures": [
+            "http://lorempixel.com/400/200/people",
+            "http://lorempixel.com/400/200/technics"
+            ],
+        "like_counter": 1,
+        "location": "St James, WA",
+        "badges": ["TauBetaPi", "Physics101Study", "GooberU"],
+        "description": "Test Description 2",
+        "image_url": "http://via.placeholder.com/100x100"
+        }
+    ]
+    }
